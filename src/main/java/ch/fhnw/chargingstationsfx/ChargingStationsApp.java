@@ -1,29 +1,53 @@
 package ch.fhnw.chargingstationsfx;
 
+import ch.fhnw.chargingstationsfx.data.csv.ChargingStation;
+import ch.fhnw.chargingstationsfx.data.csv.importer.CSVChargingStationImporter;
+import ch.fhnw.chargingstationsfx.data.interfaces.importer.IChargingStationImporter;
+import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
+import ch.fhnw.chargingstationsfx.view.RootPanel;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
-import ch.fhnw.chargingstationsfx.view.RootPanel;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
-public class ChargingStationsApp extends Application {
+public class ChargingStationsApp extends Application
+{
+		private static Logger logger = LogManager.getLogger( ChargingStationsApp.class );
+		private List<ChargingStation> chargingStations;
 
-	@Override
-	public void start(Stage primaryStage) {
-		RootPM rootPM    = new RootPM();
-		Parent rootPanel = new RootPanel(rootPM);
+		public static void main ( String[] args )
+		{
+				launch( args );
+		}
 
-		Scene scene = new Scene(rootPanel);
+		@Override
+		public void start ( Stage primaryStage )
+		{
+				RootPM rootPM = new RootPM();
+				Parent rootPanel = new RootPanel( rootPM );
 
-		primaryStage.titleProperty().bind(rootPM.applicationTitleProperty());
-		primaryStage.setScene(scene);
+				Scene scene = new Scene( rootPanel );
 
-		primaryStage.show();
-	}
+				primaryStage.titleProperty().bind( rootPM.applicationTitleProperty() );
+				primaryStage.setScene( scene );
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+				primaryStage.show();
+		}
+		@Override
+		public void init () throws Exception
+		{
+				IChargingStationImporter importer = new CSVChargingStationImporter();
+
+				Path source = Paths.get( "src", "main", "resources", "data", "CHARGING_STATION.csv" );
+				chargingStations = importer.parse( source, ';' );
+
+				logger.info( "fetched " + chargingStations.size() + " charging stations out of " + source.toUri() );
+		}
+
 }

@@ -1,7 +1,7 @@
 # OOP2 Programmierprojekt FS19
 
 ## Bearbeitet von
- - Vorname Nachname
+ - Remo von Arx
 
 ## Abgabe
 - Mittwoch, 5.6.2019, 18:00 Uhr
@@ -15,7 +15,7 @@ Die dort vorhandene Beschreibung ist massgebend, hier die wichtigsten Punkte:
  - Benutzen Sie zur Umsetzung die vorgegebene Struktur des "Application-Template".
  - Die Verwendung von SceneBuilder und FXML ist nicht erlaubt.
  - Für eine 4.0 müssen folgende Basis-Features implementiert sein
-   - Einlesen der Daten
+   X Einlesen der Daten --> umgesetzt, mit Hilfe von opencsv
    - Abspeichern der Änderungen
    - Darstellen aller Ladestationen in Tabelle/Liste 
    - Editor-Bereich
