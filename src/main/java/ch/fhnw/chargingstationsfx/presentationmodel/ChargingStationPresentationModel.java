@@ -2,8 +2,6 @@ package ch.fhnw.chargingstationsfx.presentationmodel;
 
 import ch.fhnw.chargingstationsfx.ChargingStationsApp;
 import ch.fhnw.chargingstationsfx.data.csv.ChargingStation;
-import ch.fhnw.chargingstationsfx.data.csv.exporter.CSVChargingStationExporter;
-import ch.fhnw.chargingstationsfx.data.interfaces.exporter.IChargingStationExporter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -11,7 +9,6 @@ import javafx.collections.ObservableList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.nio.file.Path;
 import java.util.List;
 
 public class ChargingStationPresentationModel
@@ -27,24 +24,6 @@ public class ChargingStationPresentationModel
 		{
 				this.chargingStations.addAll( chargingStations );
 		}
-
-		public boolean save ( Path destination, Path backupLocation )
-		{
-				logger.info( "Calling save()" );
-				IChargingStationExporter exporter = new CSVChargingStationExporter();
-				return exporter.export( destination, backupLocation, chargingStations, ';' );
-		}
-
-		public void add ()
-		{
-
-		}
-
-		public void delete ( ChargingStation chargingStationToDelete )
-		{
-
-		}
-
 
 		// all getters and setters
 		public String getApplicationTitle ()
