@@ -1,38 +1,42 @@
 package ch.fhnw.chargingstationsfx.view;
 
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStationPresentationModel;
+import ch.fhnw.chargingstationsfx.view.menu.CsMenubar;
+import ch.fhnw.chargingstationsfx.view.split.CsSplitPane;
+import javafx.scene.layout.BorderPane;
 
-import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
+public class RootPanel extends BorderPane implements ViewMixin
+{
+		private final ChargingStationPresentationModel csPM;
+		private CsSplitPane splitpane;
+		private CsMenubar menubar;
 
-public class RootPanel extends StackPane implements ViewMixin {
-    private final RootPM rootPM;
+		public RootPanel ( ChargingStationPresentationModel model )
+		{
+				this.csPM = model;
+				init();
+		}
 
-    private Button button;
+		@Override
+		public void initializeSelf ()
+		{
+				addStylesheetFiles( "style.css" );
+		}
 
-    public RootPanel(RootPM model) {
-        this.rootPM = model;
+		@Override
+		public void initializeControls ()
+		{
+				menubar = new CsMenubar();
+				splitpane = new CsSplitPane( csPM.getChargingStations() );
+		}
 
-        init();
-    }
+		@Override
+		public void layoutControls ()
+		{
+				menubar.getStyleClass().add( "cs-menubar" );
+				splitpane.getStyleClass().add( "cs-splitpane" );
 
-    @Override
-    public void initializeSelf() {
-        addStylesheetFiles("style.css");
-    }
-
-    @Override
-    public void initializeControls() {
-        button = new Button();
-    }
-
-    @Override
-    public void layoutControls() {
-        getChildren().add(button);
-    }
-
-    @Override
-    public void setupBindings() {
-        button.textProperty().bind(rootPM.greetingProperty());
-    }
+				this.setTop( menubar );
+				this.setCenter( splitpane );
+		}
 }

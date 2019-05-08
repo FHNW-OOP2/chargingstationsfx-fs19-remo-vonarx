@@ -3,7 +3,7 @@ package ch.fhnw.chargingstationsfx;
 import ch.fhnw.chargingstationsfx.data.csv.ChargingStation;
 import ch.fhnw.chargingstationsfx.data.csv.importer.CSVChargingStationImporter;
 import ch.fhnw.chargingstationsfx.data.interfaces.importer.IChargingStationImporter;
-import ch.fhnw.chargingstationsfx.presentationmodel.RootPM;
+import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStationPresentationModel;
 import ch.fhnw.chargingstationsfx.view.RootPanel;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -18,6 +18,8 @@ import java.util.List;
 
 public class ChargingStationsApp extends Application
 {
+		public static final Path SOURCE = Paths.get( "src", "main", "resources", "data", "CHARGING_STATION.csv" );
+
 		private static Logger logger = LogManager.getLogger( ChargingStationsApp.class );
 		private List<ChargingStation> chargingStations;
 
@@ -29,7 +31,7 @@ public class ChargingStationsApp extends Application
 		@Override
 		public void start ( Stage primaryStage )
 		{
-				RootPM rootPM = new RootPM();
+				ChargingStationPresentationModel rootPM = new ChargingStationPresentationModel( chargingStations );
 				Parent rootPanel = new RootPanel( rootPM );
 
 				Scene scene = new Scene( rootPanel );
@@ -39,15 +41,13 @@ public class ChargingStationsApp extends Application
 
 				primaryStage.show();
 		}
+
 		@Override
 		public void init () throws Exception
 		{
 				IChargingStationImporter importer = new CSVChargingStationImporter();
+				chargingStations = importer.parse( SOURCE, ';' );
 
-				Path source = Paths.get( "src", "main", "resources", "data", "CHARGING_STATION.csv" );
-				chargingStations = importer.parse( source, ';' );
-
-				logger.info( "fetched " + chargingStations.size() + " charging stations out of " + source.toUri() );
+				logger.info( "fetched " + chargingStations.size() + " charging stations out of " + SOURCE.toUri() );
 		}
-
 }

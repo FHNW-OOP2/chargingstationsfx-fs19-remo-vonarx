@@ -22,14 +22,14 @@ public class TestCSVChargingStationImporter
 		public void setUp ()
 		{
 				this.importer = new CSVChargingStationImporter();
-				this.source = Paths.get("src", "test", "resources", "data", "CHARGING_STATION.csv");
+				this.source = Paths.get( "src", "test", "resources", "data", "CHARGING_STATION.csv" );
 		}
 
 		public void checkSource ()
 		{
-				if( !Files.exists(this.source) )
+				if( !Files.exists( this.source ) )
 				{
-						fail("Mandatory source file not existing.");
+						fail( "Mandatory source file not existing." );
 				}
 		}
 
@@ -40,11 +40,11 @@ public class TestCSVChargingStationImporter
 				checkSource();
 
 				//when
-				assertEquals(0, this.importer.parse(this.source, '.').size());
-				assertEquals(0, this.importer.parse(this.source, ' ').size());
-				assertEquals(0, this.importer.parse(null, ';').size());
-				assertEquals(0, this.importer.parse(null, ' ').size());
-				assertEquals(6954, this.importer.parse(this.source, ';').size());
+				assertEquals( 0, this.importer.parse( this.source, '.' ).size() );
+				assertEquals( 0, this.importer.parse( this.source, ' ' ).size() );
+				assertEquals( 0, this.importer.parse( null, ';' ).size() );
+				assertEquals( 0, this.importer.parse( null, ' ' ).size() );
+				assertEquals( 6954, this.importer.parse( this.source, ';' ).size() );
 		}
 
 		@Test
@@ -52,16 +52,16 @@ public class TestCSVChargingStationImporter
 		{
 				//given
 				checkSource();
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "yyyy-mm-dd" );
 
 				//then
-				List<ChargingStation> chargingStations = this.importer.parse(this.source, ';');
+				List<ChargingStation> chargingStations = this.importer.parse( this.source, ';' );
 
 				//when
-				chargingStations.forEach(station -> assertNotNull(station.getEntityId()));
-				chargingStations.forEach(station -> assertNotNull(station.getOperatingCompany()));
-				chargingStations.forEach(station -> assertNotNull(station.getAddress()));
-				chargingStations.forEach(station -> assertDoesNotThrow(() -> formatter.parse(station.getStartupDate().toString())));
+				chargingStations.forEach( station -> assertNotNull( station.getEntityId().get() ) );
+				chargingStations.forEach( station -> assertNotNull( station.getOperatingCompany().get() ) );
+				chargingStations.forEach( station -> assertNotNull( station.getAddress().get() ) );
+				chargingStations.forEach( station -> assertDoesNotThrow( () -> formatter.parse( station.getStartupDate().get().toString() ) ) );
 		}
 
 

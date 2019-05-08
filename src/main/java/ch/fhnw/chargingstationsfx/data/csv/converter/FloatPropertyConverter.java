@@ -5,7 +5,7 @@ import com.opencsv.exceptions.CsvConstraintViolationException;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import javafx.beans.property.SimpleFloatProperty;
 
-public class FloatPropertyConverter<T> extends AbstractBeanField<T>
+public class FloatPropertyConverter extends AbstractBeanField<Float>
 {
 		@Override
 		public Object convert ( String value ) throws CsvDataTypeMismatchException, CsvConstraintViolationException

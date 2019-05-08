@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class ChargingStation
 {
 		@CsvCustomBindByName(column = "ENTITY_ID", converter = IntegerPropertyConverter.class)
-		private SimpleIntegerProperty entityId;
+		private IntegerProperty entityId;
 
 		@CsvCustomBindByName(column = "OPERATING_COMPANY", converter = StringPropertyConverter.class)
 		private SimpleStringProperty operatingCompany;
@@ -67,148 +67,78 @@ public class ChargingStation
 		@CsvCustomBindByName(column = "POWER_4_KW", converter = FloatPropertyConverter.class)
 		private SimpleFloatProperty power4KW;
 
-		public int getEntityId ()
+		public IntegerProperty getEntityId () { return entityId; }
+		public SimpleIntegerProperty getNumberOfChargingPoints ()
 		{
-				return this.entityId.get();
+				return numberOfChargingPoints;
+		}
+		public SimpleIntegerProperty getZipCode ()
+		{
+				return zipCode;
+		}
+		public SimpleFloatProperty getConnectionPowerKW ()
+		{
+				return connectionPowerKW;
+		}
+		public SimpleDoubleProperty getLongitude ()
+		{
+				return longitude;
+		}
+		public SimpleDoubleProperty getLatitude ()
+		{
+				return latitude;
+		}
+		public SimpleStringProperty getOperatingCompany ()
+		{
+				return operatingCompany;
+		}
+		public SimpleStringProperty getAddress ()
+		{
+				return address;
+		}
+		public SimpleStringProperty getCity ()
+		{
+				return city;
+		}
+		public SimpleStringProperty getLoaderType ()
+		{
+				return loaderType;
+		}
+		public SimpleObjectProperty<LocalDate> getStartupDate ()
+		{
+				return startupDate;
+		}
+		public SimpleStringProperty getPlugTypes1 ()
+		{
+				return plugTypes1;
+		}
+		public SimpleFloatProperty getPower1KW ()
+		{
+				return power1KW;
+		}
+		public SimpleStringProperty getPlugTypes2 ()
+		{
+				return plugTypes2;
+		}
+		public SimpleFloatProperty getPower2KW ()
+		{
+				return power2KW;
+		}
+		public SimpleStringProperty getPlugTypes3 ()
+		{
+				return plugTypes3;
+		}
+		public SimpleFloatProperty getPower3KW ()
+		{
+				return power3KW;
+		}
+		public SimpleStringProperty getPlugTypes4 ()
+		{
+				return plugTypes4;
+		}
+		public SimpleFloatProperty getPower4KW ()
+		{
+				return power4KW;
 		}
 
-		public void setEntityId ( int entityId ) { this.entityId.set( entityId ); }
-
-		public int getNumberOfChargingPoints ()
-		{
-				return this.numberOfChargingPoints.get();
-		}
-
-		public void setNumberOfChargingPoints ( int numberOfChargingPoints ) { this.numberOfChargingPoints.set( numberOfChargingPoints ); }
-
-		public int getZipCode ()
-		{
-				return this.zipCode.get();
-		}
-
-		public void setZipCode ( int zipCode ) { this.zipCode.set( zipCode ); }
-
-		public float getConnectionPowerKW ()
-		{
-				return this.connectionPowerKW.get();
-		}
-
-		public void setConnectionPowerKW ( float connectionPowerKW )
-		{
-				this.connectionPowerKW.set( connectionPowerKW );
-		}
-
-		public double getLongitude ()
-		{
-				return this.longitude.get();
-		}
-
-		public void setLongitude ( double longitude ) { this.longitude.set( longitude ); }
-
-		public double getLatitude ()
-		{
-				return this.latitude.get();
-		}
-
-		public void setLatitude ( double latitude ) { this.latitude.set( latitude ); }
-
-		public String getOperatingCompany ()
-		{
-				return this.operatingCompany.get();
-		}
-
-		public void setOperatingCompany ( String operatingCompany ) { this.operatingCompany.set( operatingCompany ); }
-
-		public String getAddress ()
-		{
-				return this.address.get();
-		}
-
-		public void setAddress ( String address ) { this.address.set( address ); }
-
-		public String getCity ()
-		{
-				return this.city.get();
-		}
-
-		public void setCity ( String city ) { this.city.set( city ); }
-
-		public String getLoaderType ()
-		{
-				return this.loaderType.get();
-		}
-
-		public void setLoaderType ( String loaderType )
-		{
-				this.loaderType.set( loaderType );
-		}
-
-		public LocalDate getStartupDate ()
-		{
-				return this.startupDate.get();
-		}
-
-		public void setStartupDate ( LocalDate startupDate ) { this.startupDate.set( startupDate ); }
-
-		public String getPlugTypes1 ()
-		{
-				return this.plugTypes1.get();
-		}
-
-		public void setPlugTypes1 ( String plugTypes1 ) { this.plugTypes1.set( plugTypes1 ); }
-
-		public float getPower1KW ()
-		{
-				return this.power1KW.get();
-		}
-
-		public void setPower1KW ( float power1KW ) { this.power1KW.set( power1KW ); }
-
-		public String getPlugTypes2 ()
-		{
-				return this.plugTypes2.get();
-		}
-
-		public void setPlugTypes2 ( String plugTypes2 ) { this.plugTypes2.set( plugTypes2 ); }
-
-		public float getPower2KW ()
-		{
-				return this.power2KW.get();
-		}
-
-		public void setPower2KW ( float power2KW ) { this.power2KW.set( power2KW ); }
-
-		public String getPlugTypes3 ()
-		{
-				return this.plugTypes3.get();
-		}
-
-		public void setPlugTypes3 ( String plugTypes3 ) { this.plugTypes3.set( plugTypes3 ); }
-
-		public float getPower3KW ()
-		{
-				return this.power3KW.get();
-		}
-
-		public void setPower3KW ( float power3KW ) { this.power3KW.set( power3KW ); }
-
-		public String getPlugTypes4 ()
-		{
-				return this.plugTypes4.get();
-		}
-
-		public void setPlugTypes4 ( String plugTypes4 )
-		{
-				this.plugTypes4.set( plugTypes4 );
-		}
-
-		public float getPower4KW ()
-		{
-				return this.power4KW.get();
-		}
-
-		public void setPower4KW ( float power4KW )
-		{
-				this.power4KW.set( power4KW );
-		}
 }

@@ -5,7 +5,7 @@ import com.opencsv.exceptions.CsvConstraintViolationException;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class IntegerPropertyConverter<T> extends AbstractBeanField<T>
+public class IntegerPropertyConverter extends AbstractBeanField<Integer>
 {
 		@Override
 		public Object convert ( String value ) throws CsvDataTypeMismatchException, CsvConstraintViolationException

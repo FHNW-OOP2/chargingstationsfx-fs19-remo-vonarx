@@ -1,3 +1,36 @@
 .root {
-    -fx-padding: 20px;
+    -fx-padding: 0px;
+}
+
+.cs-splitpane {
+
+    -fx-padding: 10px;
+}
+
+.cs-menubar {
+
+    -fx-padding: 5px;
+}
+
+.detail-pane {
+
+    -fx-padding: 10px;
+}
+
+.cs-detailpane {
+
+    -fx-border-color: black;
+    -fx-border-width: 1;
+}
+
+.cs-detailheaderpane {
+
+    -fx-border-color: blue;
+    -fx-border-width: 1;
+}
+
+.cs-editorpane {
+
+    -fx-border-color: red;
+    -fx-border-width: 1;
 }

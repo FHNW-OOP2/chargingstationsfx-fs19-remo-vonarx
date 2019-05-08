@@ -19,6 +19,7 @@ public class TestCSVChargingStationExporter
 {
 		private Path source;
 		private Path destination;
+		private Path backup;
 		private CSVChargingStationExporter exporter;
 		private CSVChargingStationImporter importer;
 		private List<ChargingStation> chargingStations;
@@ -31,6 +32,8 @@ public class TestCSVChargingStationExporter
 
 				source = Paths.get( "src", "test", "resources", "data", "CHARGING_STATION.csv" );
 				destination = Paths.get( "src", "test", "resources", "data", "CHARGING_STATION_out.csv" );
+				backup = Paths.get( "src", "test", "resources", "data", "bak", "CHARGING_STATION_out.csv" );
+
 		}
 
 		public void checkSource ()
@@ -45,11 +48,11 @@ public class TestCSVChargingStationExporter
 		public void testExport ()
 		{
 				//when
-				assertFalse( exporter.export( destination, null, ';' ) );
+				assertFalse( exporter.export( destination, backup, null, ';' ) );
 				assertFalse( Files.exists( destination ) );
-				assertFalse( exporter.export( null, null, ';' ) );
+				assertFalse( exporter.export( null, null, null, ';' ) );
 				assertFalse( Files.exists( destination ) );
-				assertFalse( exporter.export( destination, Collections.emptyList(), ';' ) );
+				assertFalse( exporter.export( destination, backup, Collections.emptyList(), ';' ) );
 				assertFalse( Files.exists( destination ) );
 		}
 
@@ -62,7 +65,7 @@ public class TestCSVChargingStationExporter
 				int exportSize = chargingStations.size();
 
 				//when
-				exporter.export( destination, chargingStations, ';' );
+				exporter.export( destination, backup, chargingStations, ';' );
 				//then
 				assertTrue( Files.exists( destination ) );
 				//when
@@ -86,7 +89,10 @@ public class TestCSVChargingStationExporter
 				try
 				{
 						Files.deleteIfExists( destination );
+						Files.deleteIfExists( backup );
+
 						destination = null;
+						backup = null;
 
 				}
 				catch ( IOException e )
