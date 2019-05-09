@@ -1,6 +1,9 @@
 package ch.fhnw.chargingstationsfx.data.csv;
 
-import ch.fhnw.chargingstationsfx.data.csv.converter.*;
+import ch.fhnw.chargingstationsfx.data.csv.converter.DatePropertyConverter;
+import ch.fhnw.chargingstationsfx.data.csv.converter.DoublePropertyConverter;
+import ch.fhnw.chargingstationsfx.data.csv.converter.IntegerPropertyConverter;
+import ch.fhnw.chargingstationsfx.data.csv.converter.StringPropertyConverter;
 import com.opencsv.bean.CsvCustomBindByName;
 import com.opencsv.bean.CsvDate;
 import javafx.beans.property.*;
@@ -10,7 +13,7 @@ import java.time.LocalDate;
 public class ChargingStation
 {
 		@CsvCustomBindByName(column = "ENTITY_ID", converter = IntegerPropertyConverter.class)
-		private IntegerProperty entityId;
+		private SimpleIntegerProperty entityId;
 
 		@CsvCustomBindByName(column = "OPERATING_COMPANY", converter = StringPropertyConverter.class)
 		private SimpleStringProperty operatingCompany;
@@ -18,8 +21,8 @@ public class ChargingStation
 		@CsvCustomBindByName(column = "ADDRESS", converter = StringPropertyConverter.class)
 		private SimpleStringProperty address;
 
-		@CsvCustomBindByName(column = "ZIP_CODE", converter = IntegerPropertyConverter.class)
-		private SimpleIntegerProperty zipCode;
+		@CsvCustomBindByName(column = "ZIP_CODE", converter = StringPropertyConverter.class)
+		private SimpleStringProperty zipCode;
 
 		@CsvCustomBindByName(column = "CITY", converter = StringPropertyConverter.class)
 		private SimpleStringProperty city;
@@ -38,107 +41,129 @@ public class ChargingStation
 		private SimpleObjectProperty<LocalDate> startupDate;
 
 		@CsvCustomBindByName(column = "NUMBER_OF_CHARGING_POINTS", converter = IntegerPropertyConverter.class)
-		private SimpleIntegerProperty numberOfChargingPoints;
+		private SimpleIntegerProperty chargingPoints;
 
-		@CsvCustomBindByName(column = "CONNECTION_POWER_KW", converter = FloatPropertyConverter.class)
-		private SimpleFloatProperty connectionPowerKW;
+		@CsvCustomBindByName(column = "CONNECTION_POWER_KW", converter = DoublePropertyConverter.class)
+		private SimpleDoubleProperty connectionPowerKW;
 
 		@CsvCustomBindByName(column = "PLUG_TYPES_1", converter = StringPropertyConverter.class)
 		private SimpleStringProperty plugTypes1;
 
-		@CsvCustomBindByName(column = "POWER_1_KW", converter = FloatPropertyConverter.class)
-		private SimpleFloatProperty power1KW;
+		@CsvCustomBindByName(column = "POWER_1_KW", converter = DoublePropertyConverter.class)
+		private SimpleDoubleProperty power1KW;
 
 		@CsvCustomBindByName(column = "PLUG_TYPES_2", converter = StringPropertyConverter.class)
 		private SimpleStringProperty plugTypes2;
 
-		@CsvCustomBindByName(column = "POWER_2_KW", converter = FloatPropertyConverter.class)
-		private SimpleFloatProperty power2KW;
+		@CsvCustomBindByName(column = "POWER_2_KW", converter = DoublePropertyConverter.class)
+		private SimpleDoubleProperty power2KW;
 
 		@CsvCustomBindByName(column = "PLUG_TYPES_3", converter = StringPropertyConverter.class)
 		private SimpleStringProperty plugTypes3;
 
-		@CsvCustomBindByName(column = "POWER_3_KW", converter = FloatPropertyConverter.class)
-		private SimpleFloatProperty power3KW;
+		@CsvCustomBindByName(column = "POWER_3_KW", converter = DoublePropertyConverter.class)
+		private SimpleDoubleProperty power3KW;
 
 		@CsvCustomBindByName(column = "PLUG_TYPES_4", converter = StringPropertyConverter.class)
 		private SimpleStringProperty plugTypes4;
 
-		@CsvCustomBindByName(column = "POWER_4_KW", converter = FloatPropertyConverter.class)
-		private SimpleFloatProperty power4KW;
+		@CsvCustomBindByName(column = "POWER_4_KW", converter = DoublePropertyConverter.class)
+		private SimpleDoubleProperty power4KW;
+
+		public ChargingStation ()
+		{
+				entityId = new SimpleIntegerProperty();
+				chargingPoints = new SimpleIntegerProperty();
+				connectionPowerKW = new SimpleDoubleProperty();
+				longitude = new SimpleDoubleProperty();
+				latitude = new SimpleDoubleProperty();
+				operatingCompany = new SimpleStringProperty();
+				address = new SimpleStringProperty();
+				zipCode = new SimpleStringProperty();
+				city = new SimpleStringProperty();
+				loaderType = new SimpleStringProperty();
+				startupDate = new SimpleObjectProperty<LocalDate>();
+				plugTypes1 = new SimpleStringProperty();
+				power1KW = new SimpleDoubleProperty();
+				plugTypes2 = new SimpleStringProperty();
+				power2KW = new SimpleDoubleProperty();
+				plugTypes3 = new SimpleStringProperty();
+				power3KW = new SimpleDoubleProperty();
+				plugTypes4 = new SimpleStringProperty();
+				power4KW = new SimpleDoubleProperty();
+		}
 
 		public IntegerProperty getEntityId () { return entityId; }
-		public SimpleIntegerProperty getNumberOfChargingPoints ()
+		public IntegerProperty getChargingPoints ()
 		{
-				return numberOfChargingPoints;
+				return chargingPoints;
 		}
-		public SimpleIntegerProperty getZipCode ()
+		public StringProperty getZipCode ()
 		{
 				return zipCode;
 		}
-		public SimpleFloatProperty getConnectionPowerKW ()
+		public DoubleProperty getConnectionPowerKW ()
 		{
 				return connectionPowerKW;
 		}
-		public SimpleDoubleProperty getLongitude ()
+		public DoubleProperty getLongitude ()
 		{
 				return longitude;
 		}
-		public SimpleDoubleProperty getLatitude ()
+		public DoubleProperty getLatitude ()
 		{
 				return latitude;
 		}
-		public SimpleStringProperty getOperatingCompany ()
+		public StringProperty getOperatingCompany ()
 		{
 				return operatingCompany;
 		}
-		public SimpleStringProperty getAddress ()
+		public StringProperty getAddress ()
 		{
 				return address;
 		}
-		public SimpleStringProperty getCity ()
+		public StringProperty getCity ()
 		{
 				return city;
 		}
-		public SimpleStringProperty getLoaderType ()
+		public StringProperty getLoaderType ()
 		{
 				return loaderType;
 		}
-		public SimpleObjectProperty<LocalDate> getStartupDate ()
+		public ObjectProperty<LocalDate> getStartupDate ()
 		{
 				return startupDate;
 		}
-		public SimpleStringProperty getPlugTypes1 ()
+		public StringProperty getPlugTypes1 ()
 		{
 				return plugTypes1;
 		}
-		public SimpleFloatProperty getPower1KW ()
+		public DoubleProperty getPower1KW ()
 		{
 				return power1KW;
 		}
-		public SimpleStringProperty getPlugTypes2 ()
+		public StringProperty getPlugTypes2 ()
 		{
 				return plugTypes2;
 		}
-		public SimpleFloatProperty getPower2KW ()
+		public DoubleProperty getPower2KW ()
 		{
 				return power2KW;
 		}
-		public SimpleStringProperty getPlugTypes3 ()
+		public StringProperty getPlugTypes3 ()
 		{
 				return plugTypes3;
 		}
-		public SimpleFloatProperty getPower3KW ()
+		public DoubleProperty getPower3KW ()
 		{
 				return power3KW;
 		}
-		public SimpleStringProperty getPlugTypes4 ()
+		public StringProperty getPlugTypes4 ()
 		{
 				return plugTypes4;
 		}
-		public SimpleFloatProperty getPower4KW ()
+		public DoubleProperty getPower4KW ()
 		{
 				return power4KW;
 		}
-
 }

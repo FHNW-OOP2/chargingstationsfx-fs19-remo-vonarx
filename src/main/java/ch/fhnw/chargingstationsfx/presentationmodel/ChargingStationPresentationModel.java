@@ -2,8 +2,7 @@ package ch.fhnw.chargingstationsfx.presentationmodel;
 
 import ch.fhnw.chargingstationsfx.ChargingStationsApp;
 import ch.fhnw.chargingstationsfx.data.csv.ChargingStation;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.logging.log4j.LogManager;
@@ -17,23 +16,26 @@ public class ChargingStationPresentationModel
 
 		private final StringProperty applicationTitle = new SimpleStringProperty( "ChargingStationsFX" );
 		private final StringProperty greeting = new SimpleStringProperty( "Hello World!" );
-		private final ObservableList<ChargingStation> chargingStations = FXCollections.observableArrayList();
+		private ObservableList<ChargingStation> chargingStations = FXCollections.observableArrayList();
 
+		private ObjectProperty<ChargingStation> chargingStationProperty = new SimpleObjectProperty();
 
 		public ChargingStationPresentationModel ( List<ChargingStation> chargingStations )
 		{
 				this.chargingStations.addAll( chargingStations );
+				this.setChargingStation( new ChargingStation() );
 		}
 
-		// all getters and setters
 		public String getApplicationTitle ()
 		{
 				return applicationTitle.get();
 		}
+
 		public void setApplicationTitle ( String applicationTitle )
 		{
 				this.applicationTitle.set( applicationTitle );
 		}
+
 		public StringProperty applicationTitleProperty ()
 		{
 				return applicationTitle;
@@ -42,5 +44,19 @@ public class ChargingStationPresentationModel
 		public ObservableList<ChargingStation> getChargingStations ()
 		{
 				return chargingStations;
+		}
+
+
+		public Property<ChargingStation> getChargingStationProperty ()
+		{
+				return chargingStationProperty;
+		}
+
+		public void setChargingStation ( ChargingStation chargingStation )
+		{
+				if( chargingStation != null )
+				{
+						chargingStationProperty.setValue( chargingStation );
+				}
 		}
 }

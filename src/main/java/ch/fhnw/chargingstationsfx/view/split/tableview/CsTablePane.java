@@ -1,21 +1,25 @@
 package ch.fhnw.chargingstationsfx.view.split.tableview;
 
 import ch.fhnw.chargingstationsfx.data.csv.ChargingStation;
+import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStationPresentationModel;
 import ch.fhnw.chargingstationsfx.view.ViewMixin;
+import ch.fhnw.chargingstationsfx.view.event.CsTableViewClickEvent;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
 import java.time.LocalDate;
 
 public class CsTablePane extends StackPane implements ViewMixin
 {
+		private ChargingStationPresentationModel csPM;
 		private ObservableList<ChargingStation> chargingStations;
 		private TableView<ChargingStation> tableView;
 
 		private TableColumn<ChargingStation, String> tcAddress;
-		private TableColumn<ChargingStation, Number> tcZip;
+		private TableColumn<ChargingStation, String> tcZip;
 		private TableColumn<ChargingStation, String> tcCity;
 		private TableColumn<ChargingStation, Number> tcChargingPoints;
 		private TableColumn<ChargingStation, Number> tcConnectionPowerKW;
@@ -34,16 +38,16 @@ public class CsTablePane extends StackPane implements ViewMixin
 		private TableColumn<ChargingStation, String> tcPlugTypes3;
 		private TableColumn<ChargingStation, String> tcPlugTypes4;
 
-		public CsTablePane ( ObservableList<ChargingStation> chargingStations )
+		public CsTablePane ( ChargingStationPresentationModel csPM )
 		{
-				this.chargingStations = chargingStations;
+				this.csPM = csPM;
 				init();
 		}
 
 		@Override
 		public void initializeControls ()
 		{
-				tableView = new TableView( chargingStations );
+				tableView = new TableView( csPM.getChargingStations() );
 
 				tcAddress = new TableColumn( "Strasse" );
 				tcZip = new TableColumn( "PLZ" );
@@ -68,7 +72,7 @@ public class CsTablePane extends StackPane implements ViewMixin
 				tcAddress.setCellValueFactory( c -> c.getValue().getAddress() );
 				tcZip.setCellValueFactory( c -> c.getValue().getZipCode() );
 				tcCity.setCellValueFactory( c -> c.getValue().getCity() );
-				tcChargingPoints.setCellValueFactory( c -> c.getValue().getNumberOfChargingPoints() );
+				tcChargingPoints.setCellValueFactory( c -> c.getValue().getChargingPoints() );
 				tcConnectionPowerKW.setCellValueFactory( c -> c.getValue().getConnectionPowerKW() );
 				tcEntityId.setCellValueFactory( c -> c.getValue().getEntityId() );
 				tcOperatingCompany.setCellValueFactory( c -> c.getValue().getOperatingCompany() );
@@ -99,5 +103,11 @@ public class CsTablePane extends StackPane implements ViewMixin
 								tcPlugTypes1, tcPower1KW, tcPlugTypes2, tcPower2KW,
 								tcPlugTypes3, tcPower3KW, tcPlugTypes4, tcPower4KW
 				);
+		}
+
+		@Override
+		public void setupEventHandlers ()
+		{
+				tableView.addEventHandler( MouseEvent.MOUSE_CLICKED, new CsTableViewClickEvent( csPM ) );
 		}
 }

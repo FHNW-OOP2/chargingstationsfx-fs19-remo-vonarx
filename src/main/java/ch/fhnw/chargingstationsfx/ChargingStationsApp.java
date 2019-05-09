@@ -31,12 +31,12 @@ public class ChargingStationsApp extends Application
 		@Override
 		public void start ( Stage primaryStage )
 		{
-				ChargingStationPresentationModel rootPM = new ChargingStationPresentationModel( chargingStations );
-				Parent rootPanel = new RootPanel( rootPM );
+				ChargingStationPresentationModel csPM = new ChargingStationPresentationModel( chargingStations );
+				Parent rootPanel = new RootPanel( csPM );
 
 				Scene scene = new Scene( rootPanel );
 
-				primaryStage.titleProperty().bind( rootPM.applicationTitleProperty() );
+				primaryStage.titleProperty().bind( csPM.applicationTitleProperty() );
 				primaryStage.setScene( scene );
 
 				primaryStage.show();

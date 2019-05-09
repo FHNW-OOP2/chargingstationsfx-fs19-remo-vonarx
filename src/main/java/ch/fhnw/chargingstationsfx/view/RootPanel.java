@@ -11,9 +11,9 @@ public class RootPanel extends BorderPane implements ViewMixin
 		private CsSplitPane splitpane;
 		private CsMenubar menubar;
 
-		public RootPanel ( ChargingStationPresentationModel model )
+		public RootPanel ( ChargingStationPresentationModel csPM )
 		{
-				this.csPM = model;
+				this.csPM = csPM;
 				init();
 		}
 
@@ -27,7 +27,7 @@ public class RootPanel extends BorderPane implements ViewMixin
 		public void initializeControls ()
 		{
 				menubar = new CsMenubar();
-				splitpane = new CsSplitPane( csPM.getChargingStations() );
+				splitpane = new CsSplitPane( csPM );
 		}
 
 		@Override

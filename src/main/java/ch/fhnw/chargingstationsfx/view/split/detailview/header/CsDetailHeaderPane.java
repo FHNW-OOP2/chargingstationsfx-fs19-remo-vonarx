@@ -1,5 +1,6 @@
 package ch.fhnw.chargingstationsfx.view.split.detailview.header;
 
+import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStationPresentationModel;
 import ch.fhnw.chargingstationsfx.view.ViewMixin;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
@@ -11,6 +12,8 @@ import static javafx.scene.layout.Priority.NEVER;
 
 public class CsDetailHeaderPane extends GridPane implements ViewMixin
 {
+		private ChargingStationPresentationModel csPM;
+
 		private Label lblType;
 		private Label lblAddress;
 		private Label lblZip;
@@ -19,8 +22,9 @@ public class CsDetailHeaderPane extends GridPane implements ViewMixin
 		private Label lblPowerKWConnectionPowerKW;
 		private Label lblMaps;
 
-		public CsDetailHeaderPane ()
+		public CsDetailHeaderPane ( ChargingStationPresentationModel csPM )
 		{
+				this.csPM = csPM;
 				init();
 		}
 
@@ -63,5 +67,11 @@ public class CsDetailHeaderPane extends GridPane implements ViewMixin
 				this.add( lblPowerKWConnectionPowerKW, 0, 8 );
 
 				this.add( lblMaps, 5, 0, 1, 8 );
+		}
+
+		@Override
+		public void setupBindings ()
+		{
+				lblAddress.textProperty().bindBidirectional( csPM.getChargingStationProperty().getValue().getAddress() );
 		}
 }
