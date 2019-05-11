@@ -1,24 +1,21 @@
 package ch.fhnw.chargingstationsfx.presentationmodel;
 
-import ch.fhnw.chargingstationsfx.ChargingStationsApp;
 import ch.fhnw.chargingstationsfx.data.csv.ChargingStation;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class ChargingStationPresentationModel
 {
-		private static Logger logger = LogManager.getLogger( ChargingStationsApp.class );
+		//private static Logger logger = LogManager.getLogger( ChargingStationsApp.class );
 
 		private final StringProperty applicationTitle = new SimpleStringProperty( "ChargingStationsFX" );
-		private final StringProperty greeting = new SimpleStringProperty( "Hello World!" );
+		//private final StringProperty greeting = new SimpleStringProperty( "Hello World!" );
 		private ObservableList<ChargingStation> chargingStations = FXCollections.observableArrayList();
 
-		private ObjectProperty<ChargingStation> chargingStationProperty = new SimpleObjectProperty();
+		private ObjectProperty<ChargingStation> chargingStationProperty = new SimpleObjectProperty<>();
 
 		public ChargingStationPresentationModel ( List<ChargingStation> chargingStations )
 		{
@@ -26,15 +23,15 @@ public class ChargingStationPresentationModel
 				this.setChargingStation( new ChargingStation() );
 		}
 
-		public String getApplicationTitle ()
+		/*public String getApplicationTitle ()
 		{
 				return applicationTitle.get();
-		}
+		}*/
 
-		public void setApplicationTitle ( String applicationTitle )
+		/*public void setApplicationTitle ( String applicationTitle )
 		{
 				this.applicationTitle.set( applicationTitle );
-		}
+		}*/
 
 		public StringProperty applicationTitleProperty ()
 		{
@@ -46,8 +43,7 @@ public class ChargingStationPresentationModel
 				return chargingStations;
 		}
 
-
-		public Property<ChargingStation> getChargingStationProperty ()
+		public Property<ChargingStation> chargingStationProperty ()
 		{
 				return chargingStationProperty;
 		}

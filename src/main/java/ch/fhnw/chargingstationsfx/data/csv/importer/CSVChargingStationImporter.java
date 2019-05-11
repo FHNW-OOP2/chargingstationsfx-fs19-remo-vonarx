@@ -18,11 +18,11 @@ public class CSVChargingStationImporter implements IChargingStationImporter
 		@Override
 		public List<ChargingStation> parse ( Path source, char delimiter )
 		{
-				List<ChargingStation> chargingStations = new ArrayList();
+				List<ChargingStation> chargingStations = new ArrayList<>();
 				try
 				{
 						logger.info( "parsing now, with source {} and delimiter {}", source.toUri(), delimiter );
-						List<ChargingStation> parsedChargingStations = new CsvToBeanBuilder( Files.newBufferedReader( source ) )
+						List<ChargingStation> parsedChargingStations = new CsvToBeanBuilder<ChargingStation>( Files.newBufferedReader( source ) )
 										.withType( ChargingStation.class ).withSeparator( delimiter ).build().parse();
 						chargingStations.addAll( parsedChargingStations );
 				}

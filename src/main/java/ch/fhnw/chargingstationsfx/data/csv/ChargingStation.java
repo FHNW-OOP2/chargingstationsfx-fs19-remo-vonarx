@@ -82,7 +82,7 @@ public class ChargingStation
 				zipCode = new SimpleStringProperty();
 				city = new SimpleStringProperty();
 				loaderType = new SimpleStringProperty();
-				startupDate = new SimpleObjectProperty<LocalDate>();
+				startupDate = new SimpleObjectProperty<>();
 				plugTypes1 = new SimpleStringProperty();
 				power1KW = new SimpleDoubleProperty();
 				plugTypes2 = new SimpleStringProperty();

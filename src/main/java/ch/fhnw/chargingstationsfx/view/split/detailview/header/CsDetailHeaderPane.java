@@ -72,6 +72,6 @@ public class CsDetailHeaderPane extends GridPane implements ViewMixin
 		@Override
 		public void setupBindings ()
 		{
-				lblAddress.textProperty().bindBidirectional( csPM.getChargingStationProperty().getValue().getAddress() );
+				lblAddress.textProperty().bindBidirectional( csPM.chargingStationProperty().getValue().getAddress() );
 		}
 }

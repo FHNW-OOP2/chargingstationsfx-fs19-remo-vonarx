@@ -60,6 +60,7 @@ public class CsEditorPane extends GridPane implements ViewMixin
 		@Override
 		public void initializeControls ()
 		{
+				lblEntityId = new Label( "Entitäts-Nummer" );
 				lblAddress = new Label( "Strasse" );
 				lblZip = new Label( "PLZ" );
 				lblCity = new Label( "Ort" );
@@ -80,6 +81,7 @@ public class CsEditorPane extends GridPane implements ViewMixin
 				lblPlugTypes3 = new Label( "Anschlusstyp 3" );
 				lblPlugTypes4 = new Label( "Anschlusstyp 4" );
 
+				txtfEntityId = new TextField( "Entität" );
 				txtfAddress = new TextField( "Strasse" );
 				txtfZip = new TextField( "PLZ" );
 				txtfCity = new TextField( "Ort" );
@@ -122,7 +124,10 @@ public class CsEditorPane extends GridPane implements ViewMixin
 				getRowConstraints().addAll( rcg, rcn, rcg, rcn, rcg, rcn, rcg, rcn, rcg, rcn, rcg, rcn, rcg, rcn, rcg, rcn, rcg, rcn );
 
 				this.add( lblOperatingCompany, 0, 0 );
-				this.add( txtfOperatingCompany, 2, 0, 7, 1 );
+				this.add( txtfOperatingCompany, 2, 0 );
+				this.add( lblEntityId, 2, 0 );
+				this.add( txtfEntityId, 4, 0 );
+
 				this.add( lblAddress, 0, 2 );
 				this.add( txtfAddress, 2, 2, 7, 1 );
 

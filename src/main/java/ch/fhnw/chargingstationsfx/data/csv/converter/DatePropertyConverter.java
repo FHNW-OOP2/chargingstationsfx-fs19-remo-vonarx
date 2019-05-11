@@ -1,9 +1,6 @@
 package ch.fhnw.chargingstationsfx.data.csv.converter;
 
 import com.opencsv.bean.AbstractBeanField;
-import com.opencsv.exceptions.CsvConstraintViolationException;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import javafx.beans.property.SimpleObjectProperty;
 
 import java.time.LocalDate;
@@ -12,17 +9,16 @@ import java.util.Locale;
 
 public class DatePropertyConverter extends AbstractBeanField<LocalDate>
 {
-		private DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "dd.MM.yy" );
+		private DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "dd.MM.yy" ).withLocale( Locale.GERMAN );
 
 		@Override
-		public Object convert ( String value ) throws CsvDataTypeMismatchException, CsvConstraintViolationException
+		public Object convert ( String value )
 		{
-				this.formatter = this.formatter.withLocale( Locale.GERMAN );
-				return new SimpleObjectProperty( LocalDate.parse( value, this.formatter ) );
+				return new SimpleObjectProperty<>( LocalDate.parse( value, this.formatter ) );
 		}
 
 		@Override
-		protected String convertToWrite ( Object value ) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException
+		protected String convertToWrite ( Object value )
 		{
 				SimpleObjectProperty property = ((SimpleObjectProperty) value);
 				return LocalDate.parse( property.get().toString() ).toString();

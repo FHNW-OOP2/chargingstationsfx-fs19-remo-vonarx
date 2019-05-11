@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ChargingStationsApp extends Application
 {
-		public static final Path SOURCE = Paths.get( "src", "main", "resources", "data", "CHARGING_STATION.csv" );
+		private static final Path SOURCE = Paths.get( "src", "main", "resources", "data", "CHARGING_STATION.csv" );
 
 		private static Logger logger = LogManager.getLogger( ChargingStationsApp.class );
 		private List<ChargingStation> chargingStations;
@@ -43,7 +43,7 @@ public class ChargingStationsApp extends Application
 		}
 
 		@Override
-		public void init () throws Exception
+		public void init ()
 		{
 				IChargingStationImporter importer = new CSVChargingStationImporter();
 				chargingStations = importer.parse( SOURCE, ';' );

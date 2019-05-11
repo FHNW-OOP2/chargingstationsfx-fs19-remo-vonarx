@@ -25,7 +25,7 @@ public class CSVChargingStationExporter implements IChargingStationExporter
 
 						try ( Writer writer = Files.newBufferedWriter( destination ) )
 						{
-								StatefulBeanToCsv<ChargingStation> beanToCsv = new StatefulBeanToCsvBuilder( writer )
+								StatefulBeanToCsv<ChargingStation> beanToCsv = new StatefulBeanToCsvBuilder<ChargingStation>( writer )
 												.withSeparator( delimiter )
 												.build();
 								beanToCsv.write( data );

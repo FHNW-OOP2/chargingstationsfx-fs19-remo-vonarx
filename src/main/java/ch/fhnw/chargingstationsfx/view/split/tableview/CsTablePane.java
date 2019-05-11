@@ -3,19 +3,16 @@ package ch.fhnw.chargingstationsfx.view.split.tableview;
 import ch.fhnw.chargingstationsfx.data.csv.ChargingStation;
 import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStationPresentationModel;
 import ch.fhnw.chargingstationsfx.view.ViewMixin;
-import ch.fhnw.chargingstationsfx.view.event.CsTableViewClickEvent;
-import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class CsTablePane extends StackPane implements ViewMixin
 {
 		private ChargingStationPresentationModel csPM;
-		private ObservableList<ChargingStation> chargingStations;
 		private TableView<ChargingStation> tableView;
 
 		private TableColumn<ChargingStation, String> tcAddress;
@@ -47,27 +44,27 @@ public class CsTablePane extends StackPane implements ViewMixin
 		@Override
 		public void initializeControls ()
 		{
-				tableView = new TableView( csPM.getChargingStations() );
+				tableView = new TableView<>( csPM.getChargingStations() );
 
-				tcAddress = new TableColumn( "Strasse" );
-				tcZip = new TableColumn( "PLZ" );
-				tcCity = new TableColumn( "Ort" );
-				tcChargingPoints = new TableColumn( "Anzahl Ladepunkte" );
-				tcConnectionPowerKW = new TableColumn( "Anschlussleistung" );
-				tcEntityId = new TableColumn( "Entitäts-ID" );
-				tcOperatingCompany = new TableColumn( "Betreiber" );
-				tcLongitude = new TableColumn( "Längengrad" );
-				tcLatitude = new TableColumn( "Breitengrad" );
-				tcStartupDate = new TableColumn( "Inbetriebnahme" );
-				tcLoaderType = new TableColumn( "Ladungstyp" );
-				tcPower1KW = new TableColumn( "Leistung Anschluss 1 [kW]" );
-				tcPower2KW = new TableColumn( "Leistung Anschluss 2 [kW]" );
-				tcPower3KW = new TableColumn( "Leistung Anschluss 3 [kW]" );
-				tcPower4KW = new TableColumn( "Leistung Anschluss 4 [kW]" );
-				tcPlugTypes1 = new TableColumn( "Anschlusstyp 1" );
-				tcPlugTypes2 = new TableColumn( "Anschlusstyp 2" );
-				tcPlugTypes3 = new TableColumn( "Anschlusstyp 3" );
-				tcPlugTypes4 = new TableColumn( "Anschlusstyp 4" );
+				tcAddress = new TableColumn<>( "Strasse" );
+				tcZip = new TableColumn<>( "PLZ" );
+				tcCity = new TableColumn<>( "Ort" );
+				tcChargingPoints = new TableColumn<>( "Anzahl Ladepunkte" );
+				tcConnectionPowerKW = new TableColumn<>( "Anschlussleistung" );
+				tcEntityId = new TableColumn<>( "Entitäts-ID" );
+				tcOperatingCompany = new TableColumn<>( "Betreiber" );
+				tcLongitude = new TableColumn<>( "Längengrad" );
+				tcLatitude = new TableColumn<>( "Breitengrad" );
+				tcStartupDate = new TableColumn<>( "Inbetriebnahme" );
+				tcLoaderType = new TableColumn<>( "Ladungstyp" );
+				tcPower1KW = new TableColumn<>( "Leistung Anschluss 1 [kW]" );
+				tcPower2KW = new TableColumn<>( "Leistung Anschluss 2 [kW]" );
+				tcPower3KW = new TableColumn<>( "Leistung Anschluss 3 [kW]" );
+				tcPower4KW = new TableColumn<>( "Leistung Anschluss 4 [kW]" );
+				tcPlugTypes1 = new TableColumn<>( "Anschlusstyp 1" );
+				tcPlugTypes2 = new TableColumn<>( "Anschlusstyp 2" );
+				tcPlugTypes3 = new TableColumn<>( "Anschlusstyp 3" );
+				tcPlugTypes4 = new TableColumn<>( "Anschlusstyp 4" );
 
 				tcAddress.setCellValueFactory( c -> c.getValue().getAddress() );
 				tcZip.setCellValueFactory( c -> c.getValue().getZipCode() );
@@ -96,18 +93,25 @@ public class CsTablePane extends StackPane implements ViewMixin
 				tableView.getStyleClass().add( "cs-tableView" );
 
 				getChildren().add( tableView );
-				tableView.getColumns().addAll(
+				tableView.getColumns().addAll( Arrays.asList(
 								tcAddress, tcZip, tcCity, tcChargingPoints,
 								tcConnectionPowerKW, tcEntityId, tcOperatingCompany,
 								tcLongitude, tcLatitude, tcStartupDate, tcLoaderType,
 								tcPlugTypes1, tcPower1KW, tcPlugTypes2, tcPower2KW,
-								tcPlugTypes3, tcPower3KW, tcPlugTypes4, tcPower4KW
+								tcPlugTypes3, tcPower3KW, tcPlugTypes4, tcPower4KW )
 				);
 		}
 
 		@Override
 		public void setupEventHandlers ()
 		{
-				tableView.addEventHandler( MouseEvent.MOUSE_CLICKED, new CsTableViewClickEvent( csPM ) );
+				tableView.setOnMouseClicked( event ->
+				{
+						if( event.getClickCount() == 2 )
+						{
+								ChargingStation chargingStation = tableView.getSelectionModel().getSelectedItem();
+								csPM.setChargingStation( chargingStation );
+						}
+				} );
 		}
 }
