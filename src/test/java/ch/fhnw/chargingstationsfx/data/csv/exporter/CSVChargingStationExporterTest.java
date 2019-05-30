@@ -1,7 +1,7 @@
 package ch.fhnw.chargingstationsfx.data.csv.exporter;
 
-import ch.fhnw.chargingstationsfx.data.csv.ChargingStation;
 import ch.fhnw.chargingstationsfx.data.csv.importer.CSVChargingStationImporter;
+import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStation;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestCSVChargingStationExporter
+public class CSVChargingStationExporterTest
 {
 		private Path source;
 		private Path destination;
@@ -27,13 +27,12 @@ public class TestCSVChargingStationExporter
 		@BeforeEach
 		public void setUp ()
 		{
-				importer = new CSVChargingStationImporter();
-				exporter = new CSVChargingStationExporter();
+				importer = CSVChargingStationImporter.getInstance();
+				exporter = CSVChargingStationExporter.getInstance();
 
 				source = Paths.get( "src", "test", "resources", "data", "CHARGING_STATION.csv" );
 				destination = Paths.get( "src", "test", "resources", "data", "CHARGING_STATION_out.csv" );
 				backup = Paths.get( "src", "test", "resources", "data", "bak", "CHARGING_STATION_out.csv" );
-
 		}
 
 		public void checkSource ()
@@ -47,7 +46,7 @@ public class TestCSVChargingStationExporter
 		@Test
 		public void testExport ()
 		{
-				//when
+				//then
 				assertFalse( exporter.export( destination, backup, null, ';' ) );
 				assertFalse( Files.exists( destination ) );
 				assertFalse( exporter.export( null, null, null, ';' ) );
@@ -97,7 +96,7 @@ public class TestCSVChargingStationExporter
 				}
 				catch ( IOException e )
 				{
-						e.printStackTrace();
+						fail( e.getMessage() );
 				}
 		}
 }

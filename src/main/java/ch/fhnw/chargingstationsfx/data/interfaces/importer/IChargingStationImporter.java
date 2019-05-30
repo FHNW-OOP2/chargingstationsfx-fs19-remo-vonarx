@@ -1,7 +1,7 @@
 package ch.fhnw.chargingstationsfx.data.interfaces.importer;
 
 
-import ch.fhnw.chargingstationsfx.data.csv.ChargingStation;
+import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStation;
 
 import java.nio.file.Path;
 import java.util.List;

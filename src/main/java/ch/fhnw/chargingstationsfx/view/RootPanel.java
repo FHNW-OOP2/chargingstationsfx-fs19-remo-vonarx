@@ -1,17 +1,17 @@
 package ch.fhnw.chargingstationsfx.view;
 
-import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStationPresentationModel;
-import ch.fhnw.chargingstationsfx.view.menu.CsMenubar;
+import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStationsPresentationModel;
 import ch.fhnw.chargingstationsfx.view.split.CsSplitPane;
+import ch.fhnw.chargingstationsfx.view.toolbar.CsToolbar;
 import javafx.scene.layout.BorderPane;
 
 public class RootPanel extends BorderPane implements ViewMixin
 {
-		private final ChargingStationPresentationModel csPM;
+		private ChargingStationsPresentationModel csPM;
 		private CsSplitPane splitpane;
-		private CsMenubar menubar;
+		private CsToolbar toolbar;
 
-		public RootPanel ( ChargingStationPresentationModel csPM )
+		public RootPanel ( ChargingStationsPresentationModel csPM )
 		{
 				this.csPM = csPM;
 				init();
@@ -26,17 +26,21 @@ public class RootPanel extends BorderPane implements ViewMixin
 		@Override
 		public void initializeControls ()
 		{
-				menubar = new CsMenubar();
+				toolbar = new CsToolbar( csPM );
 				splitpane = new CsSplitPane( csPM );
 		}
 
 		@Override
 		public void layoutControls ()
 		{
-				menubar.getStyleClass().add( "cs-menubar" );
+				toolbar.getStyleClass().add( "cs-toolbar" );
 				splitpane.getStyleClass().add( "cs-splitpane" );
 
-				this.setTop( menubar );
+				splitpane.prefWidthProperty().bind( this.prefWidthProperty() );
+				splitpane.prefWidthProperty().bind( this.prefWidthProperty() );
+
+
+				this.setTop( toolbar );
 				this.setCenter( splitpane );
 		}
 }

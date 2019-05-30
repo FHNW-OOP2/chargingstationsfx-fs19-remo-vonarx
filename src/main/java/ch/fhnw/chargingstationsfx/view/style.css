@@ -1,36 +1,62 @@
-.root {
-    -fx-padding: 0px;
-}
-
 .cs-splitpane {
-
     -fx-padding: 10px;
+    -fx-background-color: white;
 }
 
-.cs-menubar {
-
-    -fx-padding: 5px;
+.cs-splitpane .scroll-bar:horizontal {
+    -fx-background-color: transparent;
 }
 
-.detail-pane {
-
-    -fx-padding: 10px;
+.cs-splitpane .scroll-bar:vertical {
+    -fx-background-color: transparent;
 }
+
+
+.lbl-intro {
+
+    -fx-font-size: 16px;
+}
+
 
 .cs-detailpane {
-
-    -fx-border-color: black;
-    -fx-border-width: 1;
+    -fx-padding: 10px;
 }
 
-.cs-detailheaderpane {
 
-    -fx-border-color: blue;
-    -fx-border-width: 1;
+.cs-toolbar {
+
+    -fx-padding: 10px;
+    -fx-background-color: orange;
+    -fx-spacing: 10;
 }
 
-.cs-editorpane {
+.txtf-search {
 
-    -fx-border-color: red;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+}
+
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #FADA6E;
+}
+
+.table-column {
+    -fx-alignment: CENTER_LEFT;
+}
+
+.column-header {
+    -fx-background-color: white;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-color: gray;
     -fx-border-width: 1;
+
+}
+
+.column-header .label {
+    -fx-alignment: CENTER_LEFT;
 }

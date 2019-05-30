@@ -1,6 +1,6 @@
 package ch.fhnw.chargingstationsfx.view.split;
 
-import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStationPresentationModel;
+import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStationsPresentationModel;
 import ch.fhnw.chargingstationsfx.view.ViewMixin;
 import ch.fhnw.chargingstationsfx.view.split.detailview.CsDetailPane;
 import ch.fhnw.chargingstationsfx.view.split.tableview.CsTablePane;
@@ -8,11 +8,11 @@ import javafx.scene.control.SplitPane;
 
 public class CsSplitPane extends SplitPane implements ViewMixin
 {
-		private final ChargingStationPresentationModel csPM;
+		private final ChargingStationsPresentationModel csPM;
 		private CsTablePane tablePane;
 		private CsDetailPane detailPane;
 
-		public CsSplitPane ( ChargingStationPresentationModel csPM )
+		public CsSplitPane ( ChargingStationsPresentationModel csPM )
 		{
 				this.csPM = csPM;
 				init();
@@ -32,5 +32,6 @@ public class CsSplitPane extends SplitPane implements ViewMixin
 				detailPane.getStyleClass().add( "cs-detailpane" );
 
 				this.getItems().addAll( tablePane, detailPane );
+
 		}
 }

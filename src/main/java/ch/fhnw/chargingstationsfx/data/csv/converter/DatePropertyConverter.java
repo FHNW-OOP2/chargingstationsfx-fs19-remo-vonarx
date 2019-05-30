@@ -1,26 +1,25 @@
 package ch.fhnw.chargingstationsfx.data.csv.converter;
 
+import ch.fhnw.chargingstationsfx.util.DateUtil;
 import com.opencsv.bean.AbstractBeanField;
 import javafx.beans.property.SimpleObjectProperty;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
+
+import static ch.fhnw.chargingstationsfx.ChargingStationsApp.DATE_FORMAT;
 
 public class DatePropertyConverter extends AbstractBeanField<LocalDate>
 {
-		private DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "dd.MM.yy" ).withLocale( Locale.GERMAN );
 
 		@Override
 		public Object convert ( String value )
 		{
-				return new SimpleObjectProperty<>( LocalDate.parse( value, this.formatter ) );
+				return new SimpleObjectProperty<>( DateUtil.fromString( value, DATE_FORMAT ) );
 		}
 
 		@Override
 		protected String convertToWrite ( Object value )
 		{
-				SimpleObjectProperty property = ((SimpleObjectProperty) value);
-				return LocalDate.parse( property.get().toString() ).toString();
+				return DateUtil.toString( (LocalDate) value, DATE_FORMAT );
 		}
 }
