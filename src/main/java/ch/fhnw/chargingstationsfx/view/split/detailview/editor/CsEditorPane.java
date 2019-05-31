@@ -92,21 +92,21 @@ public class CsEditorPane extends GridPane implements ViewMixin
 		@Override
 		public void initializeControls ()
 		{
-				lblEntityId = new Label( "Entity id" );
+				lblEntityId = new Label( "Entity ID" );
 				lblAddress = new Label( "Street" );
-				lblZip = new Label( "Zip" );
+				lblZip = new Label( "ZIP" );
 				lblCity = new Label( "City" );
 				lblChargingPoints = new Label( "Charging points" );
-				lblConnectionPowerKW = new Label( "Connection power [kW]" );
+				lblConnectionPowerKW = new Label( "Connection power" );
 				lblOperatingCompany = new Label( "Operating company" );
 				lblLongitude = new Label( "Longitude" );
 				lblLatitude = new Label( "Latitude" );
 				lblStartupDate = new Label( "Startup date" );
 				lblLoaderType = new Label( "Loader type" );
-				lblPower1KW = new Label( "Power Plugtype #1" );
-				lblPower2KW = new Label( "Power Plugtype #2" );
-				lblPower3KW = new Label( "Power Plugtype #3" );
-				lblPower4KW = new Label( "Power Plugtype #4" );
+				lblPower1KW = new Label( "Plugpower #1 kW" );
+				lblPower2KW = new Label( "Plugpower #2 kW" );
+				lblPower3KW = new Label( "Plugpower #3 kW" );
+				lblPower4KW = new Label( "Plugpower #4 kW" );
 				lblPlugTypes1 = new Label( "Plugtype #1" );
 				lblPlugTypes2 = new Label( "Plugtype #2" );
 				lblPlugTypes3 = new Label( "Plugtype #3" );
@@ -160,12 +160,14 @@ public class CsEditorPane extends GridPane implements ViewMixin
 		public void layoutControls ()
 		{
 				this.getStyleClass().add( "cs-editorpane" );
+				dpStartupDate.setMaxWidth( Double.MAX_VALUE );
+				spinnerChargingPoints.setMaxWidth( Double.MAX_VALUE );
 
 				ColumnConstraints ccg = new ColumnConstraints();
 				ccg.setHgrow( ALWAYS );
 
 				ColumnConstraints ccn = new ColumnConstraints();
-				ccg.setHgrow( NEVER );
+				ccn.setHgrow( NEVER );
 
 				RowConstraints rcg = new RowConstraints();
 				rcg.setVgrow( ALWAYS );
@@ -173,10 +175,10 @@ public class CsEditorPane extends GridPane implements ViewMixin
 				RowConstraints rcn = new RowConstraints();
 				rcn.setVgrow( NEVER );
 
+				ccn.setPrefWidth( 140 );
+
 				getColumnConstraints().addAll( ccn, ccg, ccn, ccg );
 				getRowConstraints().addAll( rcg, rcg, rcg, rcg, rcg, rcg, rcg, rcg, rcg, rcg );
-
-				this.setMaxWidth( Double.MAX_VALUE );
 
 				this.add( lblOperatingCompany, 2, 0 );
 				this.add( txtfOperatingCompany, 3, 0 );
@@ -184,7 +186,7 @@ public class CsEditorPane extends GridPane implements ViewMixin
 				this.add( txtfEntityId, 1, 0 );
 
 				this.add( lblAddress, 0, 1 );
-				this.add( txtfAddress, 1, 1, 7, 1 );
+				this.add( txtfAddress, 1, 1, 3, 1 );
 
 				this.add( lblZip, 0, 2 );
 				this.add( txtfZip, 1, 2 );
@@ -198,38 +200,36 @@ public class CsEditorPane extends GridPane implements ViewMixin
 
 				this.add( lblLoaderType, 0, 4 );
 				this.add( txtfLoaderType, 1, 4 );
-				this.add( lblStartupDate, 2, 5 );
-				this.add( dpStartupDate, 3, 5 );
+				this.add( lblStartupDate, 2, 4 );
+				this.add( dpStartupDate, 3, 4 );
 
-				this.add( lblChargingPoints, 0, 6 );
-				this.add( spinnerChargingPoints, 1, 6 );
-				this.add( lblConnectionPowerKW, 2, 6 );
-				this.add( txtfConnectionPowerKW, 3, 6 );
+				this.add( lblChargingPoints, 0, 5 );
+				this.add( spinnerChargingPoints, 1, 5 );
+				this.add( lblConnectionPowerKW, 2, 5 );
+				this.add( txtfConnectionPowerKW, 3, 5 );
 
-				this.add( lblPlugTypes1, 0, 7 );
-				this.add( txtfPlugTypes1, 1, 7 );
-				this.add( lblPower1KW, 2, 7 );
-				this.add( txtfPower1KW, 3, 7 );
+				this.add( lblPlugTypes1, 0, 6 );
+				this.add( txtfPlugTypes1, 1, 6 );
+				this.add( lblPower1KW, 2, 6 );
+				this.add( txtfPower1KW, 3, 6 );
 
-				this.add( lblPlugTypes2, 0, 8 );
-				this.add( txtfPlugTypes2, 1, 8 );
-				this.add( lblPower2KW, 2, 8 );
-				this.add( txtfPower2KW, 3, 8 );
+				this.add( lblPlugTypes2, 0, 7 );
+				this.add( txtfPlugTypes2, 1, 7 );
+				this.add( lblPower2KW, 2, 7 );
+				this.add( txtfPower2KW, 3, 7 );
 
-				this.add( lblPlugTypes3, 0, 9 );
-				this.add( txtfPlugTypes3, 1, 9 );
-				this.add( lblPower3KW, 2, 9 );
-				this.add( txtfPower3KW, 3, 9 );
+				this.add( lblPlugTypes3, 0, 8 );
+				this.add( txtfPlugTypes3, 1, 8 );
+				this.add( lblPower3KW, 2, 8 );
+				this.add( txtfPower3KW, 3, 8 );
 
-				this.add( lblPlugTypes4, 0, 10 );
-				this.add( txtfPlugTypes4, 1, 10 );
-				this.add( lblPower4KW, 2, 10 );
-				this.add( txtfPower4KW, 3, 10 );
+				this.add( lblPlugTypes4, 0, 9 );
+				this.add( txtfPlugTypes4, 1, 9 );
+				this.add( lblPower4KW, 2, 9 );
+				this.add( txtfPower4KW, 3, 9 );
 
 				this.txtfEntityId.setEditable( false );
 				this.txtfConnectionPowerKW.setEditable( false );
-
-				this.setGridLinesVisible( true );
 		}
 
 		@Override
@@ -287,7 +287,7 @@ public class CsEditorPane extends GridPane implements ViewMixin
 				dpStartupDate.valueProperty().bindBidirectional( chargingStation.startupDateProperty() );
 				txtfLoaderType.textProperty().bindBidirectional( chargingStation.loaderTypeProperty() );
 
-				txtfConnectionPowerKW.textProperty().bind( chargingStation.getConnectionPowerKWBinding().asString( "%.2f" ) );
+				txtfConnectionPowerKW.textProperty().bind( chargingStation.getConnectionPowerKWBinding().asString( "%.2f kW" ) );
 
 				txtfOperatingCompany.textProperty().bindBidirectional( chargingStation.operatingCompanyProperty() );
 

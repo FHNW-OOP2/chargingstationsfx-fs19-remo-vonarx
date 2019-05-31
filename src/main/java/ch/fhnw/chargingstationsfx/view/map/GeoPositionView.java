@@ -26,7 +26,6 @@ public class GeoPositionView extends StackPane implements ViewMixin
 				public Optional<File> getPrivateStorage ()
 				{
 						// user home app config location (linux: /home/[yourname]/.gluonmaps)
-						System.out.println( System.getProperty( "user.home" ) );
 						return Optional.of( new File( System.getProperty( "user.home" ) ) );
 				}
 
@@ -92,7 +91,7 @@ public class GeoPositionView extends StackPane implements ViewMixin
 		@Override
 		public void initializeSelf ()
 		{
-				setPrefSize( 300, 300 );
+				setPrefSize( 250, 250 );
 				getStyleClass().add( "geo-position-view" );
 		}
 
@@ -105,7 +104,7 @@ public class GeoPositionView extends StackPane implements ViewMixin
 				poiLayer.addPoint( poi );
 
 				mapView = new MapView();
-				mapView.setZoom( 25 );
+				mapView.setZoom( 15 );
 				mapView.addLayer( poiLayer );
 		}
 

@@ -10,6 +10,7 @@ public class RootPanel extends BorderPane implements ViewMixin
 		private ChargingStationsPresentationModel csPM;
 		private CsSplitPane splitpane;
 		private CsToolbar toolbar;
+		private InfoPane infopane;
 
 		public RootPanel ( ChargingStationsPresentationModel csPM )
 		{
@@ -28,6 +29,7 @@ public class RootPanel extends BorderPane implements ViewMixin
 		{
 				toolbar = new CsToolbar( csPM );
 				splitpane = new CsSplitPane( csPM );
+				infopane = new InfoPane( csPM );
 		}
 
 		@Override
@@ -36,11 +38,8 @@ public class RootPanel extends BorderPane implements ViewMixin
 				toolbar.getStyleClass().add( "cs-toolbar" );
 				splitpane.getStyleClass().add( "cs-splitpane" );
 
-				splitpane.prefWidthProperty().bind( this.prefWidthProperty() );
-				splitpane.prefWidthProperty().bind( this.prefWidthProperty() );
-
-
 				this.setTop( toolbar );
 				this.setCenter( splitpane );
+				this.setBottom( infopane );
 		}
 }

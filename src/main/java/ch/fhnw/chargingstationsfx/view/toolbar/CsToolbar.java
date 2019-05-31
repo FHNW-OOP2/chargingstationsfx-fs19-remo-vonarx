@@ -4,6 +4,7 @@ import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStationsPresentation
 import ch.fhnw.chargingstationsfx.view.ViewMixin;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
@@ -18,6 +19,7 @@ public class CsToolbar extends HBox implements ViewMixin
 		private Button btnNew;
 		private Button btnDelete;
 		private TextField txtfSearch;
+		private Label lblSearchIcon;
 
 		public CsToolbar ( ChargingStationsPresentationModel csPM )
 		{
@@ -28,9 +30,10 @@ public class CsToolbar extends HBox implements ViewMixin
 		@Override
 		public void initializeControls ()
 		{
-				btnSave = new Button( "Save" );
-				btnNew = new Button( "New" );
-				btnDelete = new Button( "Delete" );
+				btnSave = new Button();
+				btnNew = new Button();
+				btnDelete = new Button();
+				lblSearchIcon = new Label();
 				txtfSearch = new TextField();
 				txtfSearch.setPromptText( "Type search text here" );
 		}
@@ -42,7 +45,7 @@ public class CsToolbar extends HBox implements ViewMixin
 				btnDelete.getStyleClass().add( "btn-delete" );
 				txtfSearch.getStyleClass().add( "txtf-search" );
 
-				getChildren().addAll( btnSave, btnNew, btnDelete, txtfSearch );
+				getChildren().addAll( btnSave, btnNew, btnDelete, lblSearchIcon, txtfSearch );
 		}
 
 		@Override

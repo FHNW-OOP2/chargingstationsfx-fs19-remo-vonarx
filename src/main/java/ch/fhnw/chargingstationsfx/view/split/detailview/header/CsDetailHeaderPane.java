@@ -9,8 +9,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-import static javafx.scene.layout.Priority.ALWAYS;
-import static javafx.scene.layout.Priority.NEVER;
+import static javafx.scene.layout.Priority.*;
 
 public class CsDetailHeaderPane extends GridPane implements ViewMixin
 {
@@ -23,7 +22,6 @@ public class CsDetailHeaderPane extends GridPane implements ViewMixin
 		private Label lblPowerKWConnectionPowerKW;
 		private GeoPositionView map;
 		private Label lblIntro;
-
 
 		public CsDetailHeaderPane ( ChargingStationsPresentationModel csPM )
 		{
@@ -40,19 +38,24 @@ public class CsDetailHeaderPane extends GridPane implements ViewMixin
 				lblChargingPoints = new Label();
 				lblPowerKWConnectionPowerKW = new Label();
 				map = new GeoPositionView();
-
 				lblIntro = new Label( "Please choose a charging station!" );
-				lblIntro.getStyleClass().add( "lbl-title" );
 		}
 
 		@Override
 		public void layoutControls ()
 		{
+				lblLoaderType.getStyleClass().add( "lbl-loadertype" );
+				lblIntro.getStyleClass().add( "lbl-intro" );
+				this.getStyleClass().add( "cs-detailheader" );
+
 				ColumnConstraints ccg = new ColumnConstraints();
 				ccg.setHgrow( ALWAYS );
 
+				ColumnConstraints ccs = new ColumnConstraints();
+				ccg.setHgrow( SOMETIMES );
+
 				ColumnConstraints ccn = new ColumnConstraints();
-				ccg.setHgrow( NEVER );
+				ccn.setHgrow( NEVER );
 
 				RowConstraints rcg = new RowConstraints();
 				rcg.setVgrow( ALWAYS );
@@ -60,40 +63,32 @@ public class CsDetailHeaderPane extends GridPane implements ViewMixin
 				RowConstraints rcn = new RowConstraints();
 				rcn.setVgrow( NEVER );
 
-				this.setMaxWidth( Double.MAX_VALUE );
+				getColumnConstraints().addAll( ccg, ccn, ccg );
+				getRowConstraints().addAll( rcn, rcn, rcn, rcn, rcn, rcn, rcg );
 
-				getColumnConstraints().addAll( ccg, ccg );
-				getRowConstraints().addAll( rcg, rcg, rcg, rcg, rcg );
-
-				this.add( lblLoaderType, 1, 1, 5, 5 );
-				this.add( lblAddress, 1, 2 );
-				this.add( lblZipCity, 1, 3 );
-				this.add( lblChargingPoints, 1, 4 );
-				this.add( lblPowerKWConnectionPowerKW, 1, 5 );
-				this.add( map, 2, 1, 1, 5 );
-				this.add( lblIntro, 0, 0, 8, 8 );
-
-				GridPane.setFillWidth( this, true );
-				this.setGridLinesVisible( true );
+				this.add( lblLoaderType, 0, 0 );
+				this.add( lblAddress, 0, 1 );
+				this.add( lblZipCity, 0, 2 );
+				this.add( lblChargingPoints, 0, 3 );
+				this.add( lblPowerKWConnectionPowerKW, 0, 4 );
+				this.add( map, 2, 0, 2, 6 );
+				this.add( lblIntro, 0, 0, 3, 6 );
 		}
 
 		@Override
 		public void setupBindings ()
 		{
 				getChildren().forEach( e -> e.visibleProperty().bind( csPM.selectedEntityId().greaterThan( 0 ) ) );
-				lblIntro.visibleProperty().unbind();
-				lblIntro.visibleProperty().bind( csPM.selectedEntityId().lessThan( 0 ) );
-
 				bindValues( csPM.getChargingStationProxy() );
+				lblIntro.visibleProperty().bind( csPM.selectedEntityId().lessThan( 0 ) );
 		}
-
 
 		private void bindValues ( ChargingStation chargingStation )
 		{
 				lblLoaderType.textProperty().bind( chargingStation.loaderTypeProperty() );
 				lblAddress.textProperty().bind( chargingStation.addressProperty() );
 				lblZipCity.textProperty().bind( chargingStation.zipCodeProperty().concat( " " ).concat( chargingStation.cityProperty() ) );
-				lblChargingPoints.textProperty().bind( chargingStation.chargingPointsProperty().asString().concat( " Ladepunkte" ) );
+				lblChargingPoints.textProperty().bind( chargingStation.chargingPointsProperty().asString().concat( " Charging point(s)" ) );
 				lblPowerKWConnectionPowerKW.textProperty().bind( chargingStation.getConnectionPowerKWBinding().asString( "%.2f kW" ) );
 				map.latitudeProperty().bindBidirectional( chargingStation.latitudeProperty() );
 				map.longitudeProperty().bindBidirectional( chargingStation.longitudeProperty() );

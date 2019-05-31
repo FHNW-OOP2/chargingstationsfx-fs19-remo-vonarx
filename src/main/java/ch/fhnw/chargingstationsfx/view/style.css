@@ -1,9 +1,26 @@
+.root {
+    -fx-background-color: white;
+    -fx-font-family: "Arial";
+}
+
+/* Info Pane*/
+.cs-infopane {
+    -fx-alignment: baseline-left;
+    -fx-padding: 0 0 5 5;
+    -fx-vgap: 10px;
+}
+
+/* Splitpane */
 .cs-splitpane {
     -fx-padding: 10px;
-    -fx-background-color: white;
+    -fx-background-color: transparent;
 }
 
 .cs-splitpane .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.split-pane:horizontal > .split-pane-divider {
     -fx-background-color: transparent;
 }
 
@@ -11,52 +28,129 @@
     -fx-background-color: transparent;
 }
 
-
-.lbl-intro {
-
-    -fx-font-size: 16px;
-}
-
-
-.cs-detailpane {
-    -fx-padding: 10px;
-}
-
-
-.cs-toolbar {
-
-    -fx-padding: 10px;
-    -fx-background-color: orange;
-    -fx-spacing: 10;
-}
-
-.txtf-search {
-
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: left center;
-}
-
-.table-row-cell {
-    -fx-background-color: white;
+/* Tableview */
+.cs-tableview .table-row-cell {
+    -fx-background-color: transparent;
     -fx-table-cell-border-color: transparent;
 }
 
-.table-row-cell:selected {
+.cs-tableview .table-row-cell:selected {
     -fx-background-color: #FADA6E;
+    -fx-table-cell-border-color: transparent;
 }
 
-.table-column {
+.cs-tableview .table-column {
     -fx-alignment: CENTER_LEFT;
 }
 
-.column-header {
+.cs-tableview .column-header {
     -fx-background-color: white;
     -fx-border-style: hidden hidden solid hidden;
-    -fx-border-color: gray;
-    -fx-border-width: 1;
-
+    -fx-border-color: #c8c8c8;
+    -fx-border-width: 1px;
 }
 
-.column-header .label {
-    -fx-alignment: CENTER_LEFT;
+.cs-tableview .column-header .label {
+    -fx-alignment: center-left;
+    -fx-font-weight: bold;
+}
+
+.cs-tableview {
+    -fx-focus-color: #c8c8c8;
+    -fx-faint-focus-color: #c8c8c8;
+}
+
+/*Toolbar*/
+.cs-toolbar {
+    -fx-padding: 5px;
+    -fx-background-color: #FCBB00;
+    -fx-spacing: 5px;
+}
+
+.cs-toolbar .btn-save {
+    -fx-graphic: url('/ch/fhnw/chargingstationsfx/view/icons/save-icon.png');
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.cs-toolbar .btn-save:hover {
+    -fx-background-color: #FBAB0B;
+    -fx-scale-y: 1.1;
+}
+
+.cs-toolbar .btn-new {
+    -fx-graphic: url('/ch/fhnw/chargingstationsfx/view/icons/add-icon.png');
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.cs-toolbar .btn-new:hover {
+    -fx-background-color: #FBAB0B;
+    -fx-scale-y: 1.1;
+}
+
+.cs-toolbar .btn-delete {
+    -fx-graphic: url('/ch/fhnw/chargingstationsfx/view/icons/delete-icon.png');
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.cs-toolbar .btn-delete:hover {
+    -fx-background-color: #FBAB0B;
+    -fx-scale-y: 1.1;
+}
+
+.cs-toolbar .txtf-search {
+    -fx-padding: 10 5 10 25;
+    -fx-background-image: url('/ch/fhnw/chargingstationsfx/view/icons/search-icon.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 5 center;
+}
+
+/*Detailheader*/
+.geo-position-view {
+    -fx-effect: dropshadow(one-pass-box, #c8c8c8, 2, 2, 2, 2);
+}
+
+.lbl-loadertype {
+    -fx-font-size: 24px;
+}
+
+.lbl-intro {
+    -fx-font-size: 24px;
+}
+
+/*Detailpane*/
+.cs-detailpane {
+    -fx-padding: 10px;
+    -fx-spacing: 20px;
+    -fx-border-size: 1px;
+    -fx-border-color: #c8c8c8;
+    -fx-border-style: solid solid solid solid;
+}
+
+/*Editorpane*/
+.cs-editorpane {
+    -fx-hgap: 5px;
+    -fx-vgap: 10px;
+}
+
+.cs-editorpane .text-field:readonly {
+    -fx-background-color: transparent;
+    -fx-border-style: hidden hidden hidden hidden;
+}
+
+.cs-editorpane .date-picker {
+    -fx-background-color: transparent;
+}
+
+.cs-editorpane .spinner {
+    -fx-background-color: transparent;
+}
+
+.cs-editorpane .text-input {
+    -fx-background-color: transparent;
+    -fx-border-size: 1px;
+    -fx-border-color: #c8c8c8;
+    -fx-border-style: hidden hidden dotted hidden;
 }

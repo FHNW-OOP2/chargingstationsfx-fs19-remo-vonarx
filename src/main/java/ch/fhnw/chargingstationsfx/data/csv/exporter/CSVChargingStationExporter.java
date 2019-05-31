@@ -34,6 +34,7 @@ public class CSVChargingStationExporter implements IChargingStationExporter
 												.withApplyQuotesToAll( false )
 												.build();
 								beanToCsv.write( data );
+								logger.info( "Success saving {} items!", data.size() );
 						}
 						catch ( Exception e )
 						{

@@ -23,10 +23,10 @@ public class ChargingStation
 		private SimpleStringProperty addressProperty = new SimpleStringProperty();
 
 		@CsvCustomBindByName(column = "ZIP_CODE", converter = StringPropertyConverter.class)
-		private SimpleStringProperty zipCodeProperty = new SimpleStringProperty();
+		private SimpleStringProperty zipCodeProperty = new SimpleStringProperty( "" );
 
 		@CsvCustomBindByName(column = "CITY", converter = StringPropertyConverter.class)
-		private SimpleStringProperty cityProperty = new SimpleStringProperty();
+		private SimpleStringProperty cityProperty = new SimpleStringProperty( "" );
 
 		@CsvCustomBindByName(column = "LONGITUDE", converter = DoublePropertyConverter.class)
 		private SimpleDoubleProperty longitudeProperty = new SimpleDoubleProperty();
@@ -75,6 +75,7 @@ public class ChargingStation
 				entityIdProperty.set( entityId );
 		}
 
+		//needs to be here for export
 		public ChargingStation () {}
 
 		public IntegerProperty entityIdProperty () { return entityIdProperty; }

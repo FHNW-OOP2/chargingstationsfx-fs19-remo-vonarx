@@ -43,8 +43,8 @@ public class ChargingStationsApp extends Application
 		public void start ( Stage primaryStage )
 		{
 				ChargingStationsPresentationModel csPM = new ChargingStationsPresentationModel( chargingStations );
-				Parent rootPanel = new RootPanel( csPM );
 
+				Parent rootPanel = new RootPanel( csPM );
 				Scene scene = new Scene( rootPanel );
 
 				primaryStage.titleProperty().set( "Charging Station Manager" );

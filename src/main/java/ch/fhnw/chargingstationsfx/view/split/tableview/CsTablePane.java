@@ -4,6 +4,7 @@ import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStation;
 import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStationsPresentationModel;
 import ch.fhnw.chargingstationsfx.view.ViewMixin;
 import ch.fhnw.chargingstationsfx.view.split.tableview.cell.LocalDateTableCell;
+import javafx.collections.ListChangeListener;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -68,8 +69,32 @@ public class CsTablePane extends StackPane implements ViewMixin
 		@Override
 		public void layoutControls ()
 		{
+				this.getStyleClass().add( "cs-tableview" );
 				tableView.getColumns().addAll( Arrays.asList( tcEntityId, tcChargingPoints, tcAddress, tcZip, tcCity, tcStartupDate, tcOperatingCompany ) );
 				getChildren().add( tableView );
+		}
+
+
+		@Override
+		public void setupValueChangedListeners ()
+		{
+				csPM.getChargingStations().addListener( (ListChangeListener<ChargingStation>) (c ->
+				{
+						c.next();
+						//not doing everything after conditions bc there are other events (updated etc.) too
+						if( c.wasAdded() )
+						{
+								tableView.scrollTo( csPM.getChargingStations().size() - 1 );
+								tableView.getSelectionModel().select( c.getFrom() );
+								csPM.setSelectedEntityId( tableView.getSelectionModel().getSelectedItem().entityIdProperty().get() );
+
+						}
+						else if( c.wasRemoved() )
+						{
+								tableView.getSelectionModel().select( c.getFrom() - 1 );
+								csPM.setSelectedEntityId( tableView.getSelectionModel().getSelectedItem().entityIdProperty().get() );
+						}
+				}) );
 		}
 
 

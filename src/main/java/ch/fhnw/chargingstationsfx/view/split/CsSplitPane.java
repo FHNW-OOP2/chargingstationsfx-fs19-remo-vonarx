@@ -32,6 +32,5 @@ public class CsSplitPane extends SplitPane implements ViewMixin
 				detailPane.getStyleClass().add( "cs-detailpane" );
 
 				this.getItems().addAll( tablePane, detailPane );
-
 		}
 }

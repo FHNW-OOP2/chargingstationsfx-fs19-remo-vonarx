@@ -1,7 +1,8 @@
 package ch.fhnw.chargingstationsfx.presentationmodel;
 
-import ch.fhnw.chargingstationsfx.ChargingStationsApp;
 import ch.fhnw.chargingstationsfx.data.csv.exporter.CSVChargingStationExporter;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -17,17 +18,23 @@ import static ch.fhnw.chargingstationsfx.ChargingStationsApp.*;
 
 public class ChargingStationsPresentationModel
 {
-		private static Logger logger = LogManager.getLogger( ChargingStationsApp.class );
+		private static Logger logger = LogManager.getLogger( ChargingStationsPresentationModel.class );
 
 		private final IntegerProperty selectedEntityId = new SimpleIntegerProperty( -1 );
 		private ObservableList<ChargingStation> allChargingStations = FXCollections.observableArrayList();
 		private FilteredList<ChargingStation> filteredChargingStations;
+		private IntegerBinding allSizeProperty;
+		private IntegerBinding filteredSizeProperty;
+
 		private ChargingStation proxy = new ChargingStation( -1 );
 
 		public ChargingStationsPresentationModel ( List<ChargingStation> chargingStations )
 		{
 				allChargingStations.addAll( chargingStations );
 				filteredChargingStations = new FilteredList<>( allChargingStations );
+
+				allSizeProperty = Bindings.size( allChargingStations );
+				filteredSizeProperty = Bindings.size( filteredChargingStations );
 
 				selectedEntityId.addListener( ( observable, oldValue, newValue ) ->
 								{
@@ -81,15 +88,9 @@ public class ChargingStationsPresentationModel
 				);
 		}
 
-		public ObservableList<ChargingStation> getChargingStations ()
-		{
-				return filteredChargingStations;
-		}
+		public ObservableList<ChargingStation> getChargingStations () { return filteredChargingStations; }
 
-		public ChargingStation getChargingStationProxy ()
-		{
-				return proxy;
-		}
+		public ChargingStation getChargingStationProxy () { return proxy; }
 
 		public ChargingStation getChargingStation ( int entityId ) { return allChargingStations.stream().filter( cs -> cs.entityIdProperty().get() == entityId ).findFirst().orElse( null ); }
 
@@ -99,6 +100,10 @@ public class ChargingStationsPresentationModel
 
 		public int generateUniqueEnitityId () { return allChargingStations.stream().mapToInt( cs -> cs.entityIdProperty().get() ).max().getAsInt() + 1; }
 
+		public IntegerBinding allSizePropertyProperty () { return allSizeProperty; }
+
+		public IntegerBinding filteredSizePropertyProperty () { return filteredSizeProperty; }
+
 		public boolean save ()
 		{
 				logger.info( "Saving all current charging station..." );
@@ -107,14 +112,14 @@ public class ChargingStationsPresentationModel
 
 		public boolean delete ( int entityId )
 		{
-				logger.info( "Trying to delete charging station with id: {0} ", entityId );
+				logger.info( "Trying to delete charging station with id: {}", entityId );
 				return allChargingStations.removeIf( cs -> cs.entityIdProperty().get() == entityId );
 		}
 
 		public boolean addNewChargingStation ()
 		{
 				int entityId = generateUniqueEnitityId();
-				logger.info( "Adding new charging station with id: {0} ", entityId );
+				logger.info( "Adding new charging station with id: {}", entityId );
 				return allChargingStations.add( new ChargingStation( entityId ) );
 		}
 
