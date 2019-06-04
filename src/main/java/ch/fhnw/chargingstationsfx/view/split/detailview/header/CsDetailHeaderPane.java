@@ -2,6 +2,7 @@ package ch.fhnw.chargingstationsfx.view.split.detailview.header;
 
 import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStation;
 import ch.fhnw.chargingstationsfx.presentationmodel.ChargingStationsPresentationModel;
+import ch.fhnw.chargingstationsfx.view.PowerStation;
 import ch.fhnw.chargingstationsfx.view.ViewMixin;
 import ch.fhnw.chargingstationsfx.view.map.GeoPositionView;
 import javafx.scene.control.Label;
@@ -22,6 +23,7 @@ public class CsDetailHeaderPane extends GridPane implements ViewMixin
 		private Label lblPowerKWConnectionPowerKW;
 		private GeoPositionView map;
 		private Label lblIntro;
+		private PowerStation customControlPowerStation;
 
 		public CsDetailHeaderPane ( ChargingStationsPresentationModel csPM )
 		{
@@ -39,6 +41,7 @@ public class CsDetailHeaderPane extends GridPane implements ViewMixin
 				lblPowerKWConnectionPowerKW = new Label();
 				map = new GeoPositionView();
 				lblIntro = new Label( "Please choose a charging station!" );
+				customControlPowerStation = new PowerStation();
 		}
 
 		@Override
@@ -73,6 +76,7 @@ public class CsDetailHeaderPane extends GridPane implements ViewMixin
 				this.add( lblPowerKWConnectionPowerKW, 0, 4 );
 				this.add( map, 2, 0, 2, 6 );
 				this.add( lblIntro, 0, 0, 3, 6 );
+				this.add( customControlPowerStation, 0, 6 );
 		}
 
 		@Override
@@ -92,5 +96,10 @@ public class CsDetailHeaderPane extends GridPane implements ViewMixin
 				lblPowerKWConnectionPowerKW.textProperty().bind( chargingStation.getConnectionPowerKWBinding().asString( "%.2f kW" ) );
 				map.latitudeProperty().bindBidirectional( chargingStation.latitudeProperty() );
 				map.longitudeProperty().bindBidirectional( chargingStation.longitudeProperty() );
+				customControlPowerStation.anzahlLadepunkteProperty().bindBidirectional( chargingStation.chargingPointsProperty() );
+				customControlPowerStation.leistung1Property().bindBidirectional( chargingStation.power1KwProperty() );
+				customControlPowerStation.leistung2Property().bindBidirectional( chargingStation.power2KwProperty() );
+				customControlPowerStation.leistung3Property().bindBidirectional( chargingStation.power3KwProperty() );
+				customControlPowerStation.leistung4Property().bindBidirectional( chargingStation.power4KwProperty() );
 		}
 }

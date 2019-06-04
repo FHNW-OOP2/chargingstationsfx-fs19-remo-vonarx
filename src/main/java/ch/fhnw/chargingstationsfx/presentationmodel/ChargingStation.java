@@ -15,65 +15,44 @@ public class ChargingStation
 {
 		@CsvCustomBindByName(column = "ENTITY_ID", converter = IntegerPropertyConverter.class)
 		private SimpleIntegerProperty entityIdProperty = new SimpleIntegerProperty();
-
 		@CsvCustomBindByName(column = "OPERATING_COMPANY", converter = StringPropertyConverter.class)
 		private SimpleStringProperty operatingCompanyProperty = new SimpleStringProperty();
-
 		@CsvCustomBindByName(column = "ADDRESS", converter = StringPropertyConverter.class)
 		private SimpleStringProperty addressProperty = new SimpleStringProperty();
-
 		@CsvCustomBindByName(column = "ZIP_CODE", converter = StringPropertyConverter.class)
 		private SimpleStringProperty zipCodeProperty = new SimpleStringProperty( "" );
-
 		@CsvCustomBindByName(column = "CITY", converter = StringPropertyConverter.class)
 		private SimpleStringProperty cityProperty = new SimpleStringProperty( "" );
-
 		@CsvCustomBindByName(column = "LONGITUDE", converter = DoublePropertyConverter.class)
 		private SimpleDoubleProperty longitudeProperty = new SimpleDoubleProperty();
-
 		@CsvCustomBindByName(column = "LATITUDE", converter = DoublePropertyConverter.class)
 		private SimpleDoubleProperty latitudeProperty = new SimpleDoubleProperty();
-
 		@CsvCustomBindByName(column = "LOADER_TYPE", converter = StringPropertyConverter.class)
 		private SimpleStringProperty loaderTypeProperty = new SimpleStringProperty();
-
 		@CsvCustomBindByName(column = "START_UP_DATE", converter = DatePropertyConverter.class)
 		@CsvDate("dd.MM.yy")
 		private SimpleObjectProperty<LocalDate> startupDateProperty = new SimpleObjectProperty<>();
-
 		@CsvCustomBindByName(column = "NUMBER_OF_CHARGING_POINTS", converter = IntegerPropertyConverter.class)
 		private SimpleIntegerProperty chargingPointsProperty = new SimpleIntegerProperty();
-
 		@CsvCustomBindByName(column = "PLUG_TYPES_1", converter = StringPropertyConverter.class)
 		private SimpleStringProperty plugTypes1Property = new SimpleStringProperty();
-
 		@CsvCustomBindByName(column = "POWER_1_KW", converter = DoublePropertyConverter.class)
 		private SimpleDoubleProperty power1KwProperty = new SimpleDoubleProperty();
-
 		@CsvCustomBindByName(column = "PLUG_TYPES_2", converter = StringPropertyConverter.class)
 		private SimpleStringProperty plugTypes2Property = new SimpleStringProperty();
-
 		@CsvCustomBindByName(column = "POWER_2_KW", converter = DoublePropertyConverter.class)
 		private SimpleDoubleProperty power2KwProperty = new SimpleDoubleProperty();
-
 		@CsvCustomBindByName(column = "PLUG_TYPES_3", converter = StringPropertyConverter.class)
 		private SimpleStringProperty plugTypes3Property = new SimpleStringProperty();
-
 		@CsvCustomBindByName(column = "POWER_3_KW", converter = DoublePropertyConverter.class)
 		private SimpleDoubleProperty power3KwProperty = new SimpleDoubleProperty();
-
 		@CsvCustomBindByName(column = "PLUG_TYPES_4", converter = StringPropertyConverter.class)
 		private SimpleStringProperty plugTypes4Property = new SimpleStringProperty();
-
 		@CsvCustomBindByName(column = "POWER_4_KW", converter = DoublePropertyConverter.class)
 		private SimpleDoubleProperty power4KwProperty = new SimpleDoubleProperty();
-
 		private DoubleBinding connectionPowerKW = power1KwProperty.add( power2KwProperty ).add( power3KwProperty ).add( power4KwProperty );
 
-		public ChargingStation ( int entityId )
-		{
-				entityIdProperty.set( entityId );
-		}
+		public ChargingStation ( int entityId ) { entityIdProperty.set( entityId ); }
 
 		//needs to be here for export
 		public ChargingStation () {}
@@ -109,14 +88,8 @@ public class ChargingStation
 				return loaderTypeProperty;
 		}
 		public ObjectProperty<LocalDate> startupDateProperty () { return startupDateProperty; }
-		public StringProperty plugTypes1Property ()
-		{
-				return plugTypes1Property;
-		}
-		public DoubleProperty power1KwProperty ()
-		{
-				return power1KwProperty;
-		}
+		public StringProperty plugTypes1Property () { return plugTypes1Property; }
+		public DoubleProperty power1KwProperty () { return power1KwProperty; }
 		public StringProperty plugTypes2Property ()
 		{
 				return plugTypes2Property;
